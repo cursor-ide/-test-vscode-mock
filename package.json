@@ -1,0 +1,69 @@
+{
+  "name": "@test/vscode-mock",
+  "version": "1.101.0",
+  "description": "Complete 'vscode' npm package (@types/vscode) / API mock for vscode extension development and testing with Bun",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bun run build:esm && bun run build:cjs && bun run build:types",
+    "build:esm": "bun build ./src/vscode/index.ts --outdir=./dist --format=esm --target=node",
+    "build:cjs": "bun build ./src/vscode/index.ts --outdir=./dist --format=cjs --target=node --outfile=index.cjs",
+    "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist",
+    "test": "bun test",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "bun run clean && bun run build"
+  },
+  "keywords": [
+    "vscode",
+    "mock",
+    "testing",
+    "bun",
+    "typescript",
+    "extension",
+    "api"
+  ],
+  "author": "cursor-ide",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.0"
+  },
+  "peerDependencies": {
+    "bun": ">=1.2.17"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cursor-ide/@test/vscode-mock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cursor-ide/@test/vscode-mock/issues"
+  },
+  "homepage": "https://github.com/cursor-ide/@test/vscode-mock#readme"
+}
